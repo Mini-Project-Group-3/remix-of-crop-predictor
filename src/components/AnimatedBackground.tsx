@@ -35,7 +35,7 @@ const AnimatedBackground = ({
 
   const getAnimationProps = () => {
     if (shouldReduceMotion) {
-      return {};
+      return { animate: {}, transition: {} };
     }
 
     switch (variant) {
@@ -48,7 +48,7 @@ const AnimatedBackground = ({
           transition: {
             duration: 20,
             repeat: Infinity,
-            ease: "linear",
+            ease: "linear" as const,
           },
         };
       case "subtle":
@@ -60,7 +60,7 @@ const AnimatedBackground = ({
           transition: {
             duration: 30,
             repeat: Infinity,
-            ease: "linear",
+            ease: "linear" as const,
           },
         };
       case "minimal":

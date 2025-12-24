@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Leaf, Target, BarChart3, Sprout, ArrowRight, Sparkles } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import HeroBackground from "@/components/HeroBackground";
 import PageTransition, { FadeIn, ScaleIn } from "@/components/PageTransition";
 import AgriculturalChatBot from "@/components/AgriculturalChatBot";
 
@@ -31,7 +32,8 @@ const HomePage = ({ onStartPrediction }: HomePageProps) => {
 
   return (
     <div className="min-h-screen pt-16">
-      <AnimatedBackground variant="hero" />
+      {/* Premium Hero Background */}
+      <HeroBackground />
       
       <PageTransition>
         {/* Hero Section */}
@@ -50,23 +52,23 @@ const HomePage = ({ onStartPrediction }: HomePageProps) => {
                 }}
                 className="inline-flex mb-8"
               >
-                <div className="rounded-full bg-primary/10 p-6 backdrop-blur-sm border border-primary/20">
-                  <Leaf className="h-16 w-16 text-primary" />
+                <div className="rounded-full bg-primary/15 p-6 backdrop-blur-md border border-primary/25 shadow-lg">
+                  <Leaf className="h-16 w-16 text-primary drop-shadow-sm" />
                 </div>
               </motion.div>
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 drop-shadow-sm">
                 Agricultural Yield
-                <span className="block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-primary via-primary/85 to-emerald-600 bg-clip-text text-transparent">
                   Predictor
                 </span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
                 Get accurate yield predictions for your crops based on soil conditions, 
                 nutrients, rainfall, and fertilizer data using advanced agricultural analytics.
               </p>
@@ -75,13 +77,13 @@ const HomePage = ({ onStartPrediction }: HomePageProps) => {
             <FadeIn delay={0.3}>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button
                     onClick={onStartPrediction}
                     size="lg"
-                    className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary to-primary/80 shadow-xl hover:shadow-2xl transition-all gap-2"
+                    className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary via-primary to-emerald-600 shadow-xl hover:shadow-2xl transition-all gap-2 border-0"
                   >
                     <Sparkles className="h-5 w-5" />
                     Start Yield Prediction
@@ -92,15 +94,11 @@ const HomePage = ({ onStartPrediction }: HomePageProps) => {
             </FadeIn>
 
             <FadeIn delay={0.4}>
-              <p className="text-sm text-muted-foreground mt-6">
+              <p className="text-sm text-muted-foreground mt-6 font-medium">
                 ✅ Free analysis • Instant results
               </p>
             </FadeIn>
           </div>
-
-          {/* Decorative gradient orbs */}
-          <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10" />
-          <div className="absolute bottom-1/4 right-10 w-48 h-48 bg-accent/20 rounded-full blur-3xl -z-10" />
         </section>
 
         {/* Features Section */}

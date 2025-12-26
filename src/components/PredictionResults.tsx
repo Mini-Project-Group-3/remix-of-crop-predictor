@@ -247,11 +247,9 @@ const PredictionResults = ({ predictedYield, onCalculateAnother, formData, onEdi
             <div className="text-xl text-muted-foreground mb-6">
               kg/hectare
             </div>
-            <div className="flex items-center justify-center gap-2">
-              <Badge variant="outline" className="px-4 py-2 text-sm border-primary/50 text-primary">
-                ML Model Prediction
-              </Badge>
-            </div>
+            <p className="text-xs text-muted-foreground">
+              Powered by machine learning prediction model
+            </p>
           </CardContent>
         </Card>
 

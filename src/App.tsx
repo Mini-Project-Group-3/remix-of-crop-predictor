@@ -15,18 +15,20 @@ import LocationForm from "./components/LocationForm";
 import SoilNutrientForm from "./components/SoilNutrientForm";
 import FertilizerTypeForm from "./components/FertilizerTypeForm";
 import RainfallInputForm from "./components/RainfallInputForm";
+import SeasonMonthForm from "./components/SeasonMonthForm";
 import CropSelectionForm from "./components/CropSelectionForm";
 import PredictionResults from "./components/PredictionResults";
 
 const queryClient = new QueryClient();
 
-type PredictionStep = 'none' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'crop' | 'results';
+type PredictionStep = 'none' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'season' | 'crop' | 'results';
 
 interface FormData {
   location?: { district: string; taluka: string };
   soilData?: { soilColor: string; nitrogen: number; phosphorus: number; potassium: number; pH: number };
   fertilizer?: { fertilizerType: string };
   rainfall?: { rainfall: number; minTemp: number; maxTemp: number };
+  seasonMonth?: { season: string; month: string };
   crop?: { crop: string };
 }
 
@@ -109,9 +111,11 @@ const App = () => {
       case 'fertilizer':
         return <FertilizerTypeForm onNext={(d) => { setFormData(p => ({ ...p, fertilizer: d })); setPredictionStep('rainfall'); }} onBack={() => setPredictionStep('soil')} />;
       case 'rainfall':
-        return <RainfallInputForm onNext={(d) => { setFormData(p => ({ ...p, rainfall: d })); setPredictionStep('crop'); }} onBack={() => setPredictionStep('fertilizer')} />;
+        return <RainfallInputForm onNext={(d) => { setFormData(p => ({ ...p, rainfall: d })); setPredictionStep('season'); }} onBack={() => setPredictionStep('fertilizer')} />;
+      case 'season':
+        return <SeasonMonthForm onNext={(d) => { setFormData(p => ({ ...p, seasonMonth: d })); setPredictionStep('crop'); }} onBack={() => setPredictionStep('rainfall')} />;
       case 'crop':
-        return <CropSelectionForm onSubmit={(d) => { setFormData(p => ({ ...p, crop: d })); setPredictionStep('results'); }} onBack={() => setPredictionStep('rainfall')} />;
+        return <CropSelectionForm onSubmit={(d) => { setFormData(p => ({ ...p, crop: d })); setPredictionStep('results'); }} onBack={() => setPredictionStep('season')} />;
       case 'results':
         return <PredictionResults results={calculatePrediction(formData)} onCalculateAnother={() => { setFormData({}); setPredictionStep('none'); }} formData={formData} onEditField={(field, data) => setFormData(p => ({ ...p, [field === 'soil' ? 'soilData' : field]: data }))} />;
       default:

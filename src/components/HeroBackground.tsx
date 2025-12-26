@@ -1,22 +1,40 @@
 import { motion, useReducedMotion } from "framer-motion";
+import heroBg from "@/assets/hero-bg-2.png";
 
 const HeroBackground = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className="absolute inset-0 overflow-hidden -z-10">
-      {/* Base gradient - green to warm sunlight */}
+      {/* Background image */}
+      <motion.div
+        className="absolute inset-0"
+        animate={shouldReduceMotion ? {} : {
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <img
+          src={heroBg}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+
+      {/* Gradient overlay for readability */}
       <div 
         className="absolute inset-0"
         style={{
           background: `
             linear-gradient(
               135deg,
-              hsl(142 40% 92%) 0%,
-              hsl(120 30% 95%) 25%,
-              hsl(80 35% 93%) 50%,
-              hsl(45 50% 94%) 75%,
-              hsl(38 55% 92%) 100%
+              hsl(142 40% 92% / 0.7) 0%,
+              hsl(80 35% 93% / 0.5) 50%,
+              hsl(38 55% 92% / 0.6) 100%
             )
           `,
         }}

@@ -113,64 +113,29 @@ const AgriculturalChatBot = ({ onStartPrediction }: AgriculturalChatBotProps) =>
     setMessages(prev => [...prev, newMessage]);
   };
 
-  const simulateBotResponse = async (userMessage: string) => {
+  const fetchBotResponse = async (userMessage: string) => {
     setIsTyping(true);
     
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsTyping(false);
+    try {
+      const response = await fetch('http://127.0.0.1:8000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    // Mock complex response with segments
-    if (userMessage.toLowerCase().includes('irrigation') || 
-        userMessage.toLowerCase().includes('sugarcane') ||
-        userMessage.toLowerCase().includes('kolhapur')) {
-      
-      const segments: Message['segments'] = [
-        {
-          type: 'climate',
-          title: 'Climate Advisory',
-          content: 'Kolhapur region is ideal for sugarcane with moderate rainfall and warm temperatures.',
-          icon: '⚠️'
-        },
-        {
-          type: 'yield',
-          title: 'Predicted Yield',
-          content: 'Expected yield: **41.2 quintals/acre** based on current conditions.',
-          icon: '📈'
-        },
-        {
-          type: 'advisory',
-          title: 'Irrigation Advice',
-          content: 'Drip irrigation recommended. Water every 7-10 days during growing season.',
-          icon: '💧'
-        },
-        {
-          type: 'nutrition',
-          title: 'Nutrition Management',
-          content: 'Apply 120kg N + 60kg P2O5 + 60kg K2O per acre in split doses.',
-          icon: '🌱'
-        },
-        {
-          type: 'schemes',
-          title: 'Government Schemes',
-          content: 'Eligible for PM-KISAN and sugar subsidy schemes.',
-          icon: '🏛️'
-        }
-      ];
+      if (!response.ok) {
+        throw new Error('Failed to get response from chatbot');
+      }
 
-      addBotMessage("Here's comprehensive guidance for sugarcane cultivation in Kolhapur:", segments);
-    } else {
-      // Simple response for other queries
-      const responses = [
-        "That's a great question! For detailed crop-specific advice, I recommend using our prediction tool.",
-        "Based on our agricultural database, here are some insights for your query...",
-        "I can help you with that! Consider factors like soil type, rainfall, and local climate conditions.",
-        "For the most accurate recommendations, please provide your location and crop details using our prediction form."
-      ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      addBotMessage(randomResponse);
+      const data = await response.json();
+      addBotMessage(data.response || data.reply || data.text || "I received your message but couldn't process a response.");
+    } catch (error) {
+      console.error('Chatbot API error:', error);
+      addBotMessage("Sorry, I'm having trouble connecting right now. Please try again later.");
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -181,8 +146,8 @@ const AgriculturalChatBot = ({ onStartPrediction }: AgriculturalChatBotProps) =>
     addUserMessage(userMessage);
     setInputValue("");
 
-    // Simulate bot response
-    await simulateBotResponse(userMessage);
+    // Get response from NLP chatbot API
+    await fetchBotResponse(userMessage);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

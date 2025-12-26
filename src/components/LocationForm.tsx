@@ -73,9 +73,9 @@ const LocationForm = ({ onNext, onBack }: LocationFormProps) => {
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={onBack} disabled className="flex items-center gap-2 hover:bg-muted/50 transition-all duration-300 group">
+          <Button variant="outline" onClick={onBack} className="flex items-center gap-2 hover:bg-muted/50 transition-all duration-300 group">
             <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
-            Back
+            Cancel
           </Button>
           <Button 
             onClick={handleNext} 

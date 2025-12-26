@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Leaf, Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles } from "lucide-react";
-import AnimatedBackground from "@/components/AnimatedBackground";
+import heroBg from "@/assets/hero-bg.png";
 import { toast } from "@/hooks/use-toast";
 
 interface AuthProps {
@@ -85,9 +85,30 @@ const Auth = ({ onLogin }: AuthProps) => {
     onLogin();
   };
 
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      <AnimatedBackground variant="hero" />
+      {/* Background Image */}
+      <motion.div
+        className="absolute inset-0 -z-10"
+        animate={shouldReduceMotion ? {} : {
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <img
+          src={heroBg}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
+      </motion.div>
       
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.95 }}

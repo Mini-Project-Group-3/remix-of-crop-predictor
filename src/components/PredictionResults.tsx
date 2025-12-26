@@ -848,51 +848,7 @@ const PredictionResults = ({ results, onCalculateAnother, formData, onEditField 
           </CardContent>
         </Card>
 
-        {/* Alternative Crops */}
-        <div>
-          <h2 className="text-2xl font-bold text-foreground mb-2 text-center">
-            Alternative Crop Recommendations
-          </h2>
-          <p className="text-center text-muted-foreground mb-6">
-            Based on your soil, nutrient, and rainfall data
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              { name: "WHEAT", yield: 92, fertilizer: "DAP (18-46-0)", month: "October - November" },
-              { name: "SORGHUM (JOWAR)", yield: 88, fertilizer: "NPK (12-32-16)", month: "June - July" },
-              { name: "PEARL MILLET (BAJRA)", yield: 85, fertilizer: "Urea (46-0-0)", month: "July - August" }
-            ].map((crop, index) => (
-              <Card key={index} className="border-2 border-border bg-card/95 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all group">
-                <CardContent className="p-6 text-center space-y-4">
-                  <div className="mx-auto w-fit">
-                    <div className="rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors px-4 py-2">
-                      <span className="text-2xl font-bold text-primary">{crop.yield}%</span>
-                    </div>
-                  </div>
-                  
-                  <CardTitle className="text-xl font-bold text-foreground">
-                    {crop.name}
-                  </CardTitle>
-                  
-                  <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex items-center justify-center gap-2">
-                      <Package className="h-3.5 w-3.5" />
-                      <span>{crop.fertilizer}</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <Target className="h-3.5 w-3.5" />
-                      <span>{crop.month}</span>
-                    </div>
-                  </div>
-                  
-                  <Button variant="outline" size="sm" className="w-full mt-4 rounded-xl hover:bg-primary hover:text-primary-foreground transition-colors">
-                    View Details
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+        {/* Alternative Crops section removed */}
 
         {/* Actionable Insights Section */}
         <ActionableInsights 

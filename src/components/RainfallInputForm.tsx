@@ -48,11 +48,11 @@ const RainfallInputForm = ({ onNext, onBack }: RainfallInputFormProps) => {
       <Card className="w-full max-w-2xl border-0 bg-gradient-to-br from-card to-accent/5 shadow-xl">
         <CardHeader className="text-center">
           <div className="mb-4 flex items-center justify-between text-sm">
-            <span className="text-primary font-semibold">Step 4 of 5</span>
-            <span className="text-muted-foreground">80% Complete</span>
+            <span className="text-primary font-semibold">Step 4 of 6</span>
+            <span className="text-muted-foreground">67% Complete</span>
           </div>
           <div className="mb-4 h-2 bg-progress-bg rounded-full overflow-hidden">
-            <div className="h-full w-[80%] progress-enhanced rounded-full animate-progress transition-all duration-1000"></div>
+            <div className="h-full w-[67%] progress-enhanced rounded-full animate-progress transition-all duration-1000"></div>
           </div>
           
           <div className="mb-4 flex justify-center">

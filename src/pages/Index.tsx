@@ -4,10 +4,11 @@ import LocationForm from "@/components/LocationForm";
 import SoilNutrientForm from "@/components/SoilNutrientForm";
 import FertilizerTypeForm from "@/components/FertilizerTypeForm";
 import RainfallInputForm from "@/components/RainfallInputForm";
+import SeasonMonthForm from "@/components/SeasonMonthForm";
 import CropSelectionForm from "@/components/CropSelectionForm";
 import PredictionResults from "@/components/PredictionResults";
 
-type Step = 'landing' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'crop' | 'results';
+type Step = 'landing' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'season' | 'crop' | 'results';
 
 interface FormData {
   location?: { district: string; taluka: string };
@@ -20,6 +21,7 @@ interface FormData {
   };
   fertilizer?: { fertilizerType: string };
   rainfall?: { rainfall: number; minTemp: number; maxTemp: number };
+  seasonMonth?: { season: string; month: string };
   crop?: { crop: string };
 }
 
@@ -124,6 +126,11 @@ const Index = () => {
 
   const handleRainfallData = (rainfallData: { rainfall: number; minTemp: number; maxTemp: number }) => {
     setFormData(prev => ({ ...prev, rainfall: rainfallData }));
+    setCurrentStep('season');
+  };
+
+  const handleSeasonMonthData = (seasonMonthData: { season: string; month: string }) => {
+    setFormData(prev => ({ ...prev, seasonMonth: seasonMonthData }));
     setCurrentStep('crop');
   };
 
@@ -147,8 +154,11 @@ const Index = () => {
       case 'rainfall':
         setCurrentStep('fertilizer');
         break;
-      case 'crop':
+      case 'season':
         setCurrentStep('rainfall');
+        break;
+      case 'crop':
+        setCurrentStep('season');
         break;
       case 'results':
         setCurrentStep('crop');
@@ -199,6 +209,9 @@ const Index = () => {
     
     case 'rainfall':
       return <RainfallInputForm onNext={handleRainfallData} onBack={handleBack} />;
+    
+    case 'season':
+      return <SeasonMonthForm onNext={handleSeasonMonthData} onBack={handleBack} />;
     
     case 'crop':
       return <CropSelectionForm onSubmit={handleCropData} onBack={handleBack} />;

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import LandingPage from "@/components/LandingPage";
 import LocationForm from "@/components/LocationForm";
 import SoilNutrientForm from "@/components/SoilNutrientForm";
@@ -8,7 +9,7 @@ import SeasonMonthForm from "@/components/SeasonMonthForm";
 import CropSelectionForm from "@/components/CropSelectionForm";
 import PredictionResults from "@/components/PredictionResults";
 
-type Step = 'landing' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'season' | 'crop' | 'results';
+type Step = 'landing' | 'location' | 'soil' | 'fertilizer' | 'rainfall' | 'season' | 'crop' | 'loading' | 'results' | 'error';
 
 interface FormData {
   location?: { district: string; taluka: string };
@@ -25,78 +26,67 @@ interface FormData {
   crop?: { crop: string };
 }
 
+interface PredictionResult {
+  predicted_yield: number;
+}
+
+const API_URL = "http://127.0.0.1:8000/predict";
+
 const Index = () => {
   const [currentStep, setCurrentStep] = useState<Step>('landing');
   const [formData, setFormData] = useState<FormData>({});
+  const [predictionResult, setPredictionResult] = useState<PredictionResult | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Mock prediction calculation
-  const calculatePrediction = (data: FormData) => {
-    // Simple mock calculation based on the inputs
-    const baseScore = 55;
-    let score = baseScore;
+  const fetchPrediction = async (data: FormData) => {
+    setCurrentStep('loading');
+    setPredictionResult(null);
+    setErrorMessage("");
 
-    // Soil factors (simplified)
-    if (data.soilData) {
-      if (['Loam', 'Black'].includes(data.soilData.soilColor)) score += 10;
-      if (data.soilData.nitrogen >= 100 && data.soilData.nitrogen <= 300) score += 5;
-      if (data.soilData.phosphorus >= 50 && data.soilData.phosphorus <= 150) score += 5;
-      if (data.soilData.potassium >= 150 && data.soilData.potassium <= 400) score += 5;
-      if (data.soilData.pH >= 6.0 && data.soilData.pH <= 8.0) score += 5;
-    }
+    const avgTemperature = data.rainfall 
+      ? (data.rainfall.minTemp + data.rainfall.maxTemp) / 2 
+      : 0;
 
-    // Rainfall factors
-    if (data.rainfall) {
-      if (data.rainfall.rainfall >= 500 && data.rainfall.rainfall <= 1500) score += 8;
-      else if (data.rainfall.rainfall > 1500) score += 3;
-    }
-
-    // Fertilizer match (simplified)
-    if (data.fertilizer?.fertilizerType === 'Organic Compost') score += 5;
-
-    // Cap at 100
-    score = Math.min(100, score);
-
-    return {
-      mainScore: score,
-      confidence: 90,
-      location: `${data.location?.district}, ${data.location?.taluka}`,
-      factorScores: {
-        soilQuality: Math.min(100, 70 + (data.soilData ? 15 : 0)),
-        nutrientBalance: Math.min(100, 40 + (data.soilData?.nitrogen || 0) * 0.1),
-        weatherConditions: Math.min(100, 30 + (data.rainfall ? 25 : 0)),
-        fertilizerEfficiency: 65,
-      },
-      inputSummary: {
-        location: `${data.location?.district}, ${data.location?.taluka}` || 'Not provided',
-        soilColor: data.soilData?.soilColor || 'Not provided',
-        crop: data.crop?.crop || 'Not provided',
-        nitrogen: data.soilData?.nitrogen || 0,
-        phosphorus: data.soilData?.phosphorus || 0,
-        potassium: data.soilData?.potassium || 0,
-        pH: data.soilData?.pH || 0,
-        rainfall: data.rainfall?.rainfall || 0,
-        minTemp: data.rainfall?.minTemp || 0,
-        maxTemp: data.rainfall?.maxTemp || 0,
-        fertilizer: data.fertilizer?.fertilizerType || 'Not provided',
-      },
-      alternatives: [
-        {
-          name: 'Sorghum (Jowar)',
-          suitability: 92,
-          benefit: 'Tolerant to low rainfall and high soil iron content',
-        },
-        {
-          name: 'Pearl Millet (Bajra)',
-          suitability: 88,
-          benefit: 'Excellent drought tolerance and adapts to various soils',
-        },
-        {
-          name: 'Finger Millet (Ragi)',
-          suitability: 85,
-          benefit: 'Thrives in marginal lands with minimal water requirements',
-        },
-      ],
+    const requestBody = {
+      District_Name: data.location?.district || "",
+      Nitrogen: data.soilData?.nitrogen || 0,
+      Phosphorus: data.soilData?.phosphorus || 0,
+      Potassium: data.soilData?.potassium || 0,
+      pH: data.soilData?.pH || 0,
+      Rainfall: data.rainfall?.rainfall || 0,
+      Temperature: avgTemperature,
+      Soil_color: data.soilData?.soilColor || "",
+      Season: data.seasonMonth?.season || "",
+      Month: data.seasonMonth?.month || "",
+      Crop: data.crop?.crop || "",
+      Fertilizer: data.fertilizer?.fertilizerType || ""
     };
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+
+      const result: PredictionResult = await response.json();
+      setPredictionResult(result);
+      setCurrentStep('results');
+    } catch (error) {
+      console.error("Prediction API error:", error);
+      const message = error instanceof Error ? error.message : "Failed to connect to prediction server";
+      setErrorMessage(message);
+      setCurrentStep('error');
+      toast.error("Prediction Failed", {
+        description: message,
+      });
+    }
   };
 
   const handleStartPrediction = () => {
@@ -137,7 +127,7 @@ const Index = () => {
   const handleCropData = (cropData: { crop: string }) => {
     const finalData = { ...formData, crop: cropData };
     setFormData(finalData);
-    setCurrentStep('results');
+    fetchPrediction(finalData);
   };
 
   const handleBack = () => {
@@ -168,32 +158,25 @@ const Index = () => {
 
   const handleCalculateAnother = () => {
     setFormData({});
+    setPredictionResult(null);
+    setErrorMessage("");
     setCurrentStep('landing');
   };
 
-  const handleEditField = (field: string, data: any) => {
-    const updatedData = { ...formData };
-    switch (field) {
-      case 'location':
-        updatedData.location = data;
-        break;
-      case 'soil':
-        updatedData.soilData = data;
-        break;
-      case 'fertilizer':
-        updatedData.fertilizer = data;
-        break;
-      case 'rainfall':
-        updatedData.rainfall = data;
-        break;
-      case 'crop':
-        updatedData.crop = data;
-        break;
+  const handleRetry = () => {
+    if (formData.crop) {
+      fetchPrediction(formData);
+    } else {
+      setCurrentStep('crop');
     }
-    setFormData(updatedData);
   };
 
-  // Render current step
+  const handleEditField = (field: string, data: any) => {
+    const updatedData = { ...formData, [field === 'soil' ? 'soilData' : field]: data };
+    setFormData(updatedData);
+    fetchPrediction(updatedData);
+  };
+
   switch (currentStep) {
     case 'landing':
       return <LandingPage onStartPrediction={handleStartPrediction} />;
@@ -216,10 +199,57 @@ const Index = () => {
     case 'crop':
       return <CropSelectionForm onSubmit={handleCropData} onBack={handleBack} />;
     
+    case 'loading':
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20 flex items-center justify-center p-4">
+          <div className="text-center space-y-6">
+            <div className="relative">
+              <div className="w-20 h-20 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-foreground">Analyzing Your Data</h2>
+              <p className="text-muted-foreground">Connecting to ML prediction model...</p>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'error':
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20 flex items-center justify-center p-4">
+          <div className="max-w-md w-full bg-card rounded-2xl border-2 border-destructive/30 p-8 text-center space-y-6 shadow-xl">
+            <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mx-auto">
+              <svg className="w-8 h-8 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-foreground">Prediction Failed</h2>
+              <p className="text-muted-foreground text-sm">{errorMessage}</p>
+            </div>
+            <div className="space-y-3">
+              <button
+                onClick={handleRetry}
+                className="w-full py-3 px-6 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all"
+              >
+                Retry Prediction
+              </button>
+              <button
+                onClick={handleCalculateAnother}
+                className="w-full py-3 px-6 bg-muted text-foreground rounded-lg font-semibold hover:bg-muted/80 transition-all"
+              >
+                Start Over
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    
     case 'results':
+      if (!predictionResult) return null;
       return (
         <PredictionResults 
-          results={calculatePrediction(formData)} 
+          predictedYield={predictionResult.predicted_yield}
           onCalculateAnother={handleCalculateAnother}
           formData={formData}
           onEditField={handleEditField}

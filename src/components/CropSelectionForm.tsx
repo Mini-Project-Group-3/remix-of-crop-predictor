@@ -35,7 +35,7 @@ const CropSelectionForm = ({ onSubmit, onBack }: CropSelectionFormProps) => {
       <Card className="w-full max-w-4xl border-0 bg-gradient-to-br from-card to-accent/5 shadow-xl">
         <CardHeader className="text-center">
           <div className="mb-4 flex items-center justify-between text-sm">
-            <span className="text-primary font-semibold">Step 5 of 5</span>
+            <span className="text-primary font-semibold">Step 6 of 6</span>
             <span className="text-muted-foreground">100% Complete</span>
           </div>
           <div className="mb-4 h-2 bg-progress-bg rounded-full overflow-hidden">

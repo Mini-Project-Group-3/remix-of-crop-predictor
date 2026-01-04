@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Leaf, Menu, LogOut, Home, Info, Settings, Users } from "lucide-react";
+import { Leaf, Menu, LogOut, Home, Info, Settings, Users, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -72,8 +72,17 @@ const Navbar = ({ onLogout }: NavbarProps) => {
             })}
           </nav>
 
-          {/* Desktop Logout */}
-          <div className="hidden md:block">
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-2 hover:bg-primary/10 hover:text-primary transition-all duration-300"
+              title="E-Commerce Store"
+            >
+              <ShoppingCart className="h-4 w-4" />
+              Shop
+            </Button>
             <Button
               variant="outline"
               size="sm"
@@ -124,7 +133,15 @@ const Navbar = ({ onLogout }: NavbarProps) => {
                   })}
                 </nav>
 
-                <div className="mt-auto pt-6 border-t border-border">
+                <div className="mt-auto pt-6 border-t border-border space-y-2">
+                  <Button
+                    variant="ghost"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full gap-2 hover:bg-primary/10 hover:text-primary"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    Shop
+                  </Button>
                   <Button
                     variant="outline"
                     onClick={() => {

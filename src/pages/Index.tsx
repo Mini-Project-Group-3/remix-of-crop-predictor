@@ -197,7 +197,7 @@ const Index = () => {
       return <SeasonMonthForm onNext={handleSeasonMonthData} onBack={handleBack} />;
     
     case 'crop':
-      return <CropSelectionForm onSubmit={handleCropData} onBack={handleBack} />;
+      return <CropSelectionForm onSubmit={handleCropData} onBack={handleBack} formData={formData} />;
     
     case 'loading':
       return (

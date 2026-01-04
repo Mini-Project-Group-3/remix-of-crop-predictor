@@ -74,15 +74,16 @@ const Navbar = ({ onLogout }: NavbarProps) => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2 hover:bg-primary/10 hover:text-primary transition-all duration-300"
-              onClick={() => window.open('https://yield-wise-shop.lovable.app', '_blank')}
-            >
-              <ShoppingCart className="h-4 w-4" />
-              Shop
-            </Button>
+            <Link to="/shop">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-2 hover:bg-primary/10 hover:text-primary transition-all duration-300"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Shop
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="sm"
@@ -134,17 +135,15 @@ const Navbar = ({ onLogout }: NavbarProps) => {
                 </nav>
 
                 <div className="mt-auto pt-6 border-t border-border space-y-2">
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      setIsOpen(false);
-                      window.open('https://yield-wise-shop.lovable.app', '_blank');
-                    }}
-                    className="w-full gap-2 hover:bg-primary/10 hover:text-primary"
-                  >
-                    <ShoppingCart className="h-4 w-4" />
-                    Shop
-                  </Button>
+                  <Link to="/shop" onClick={() => setIsOpen(false)}>
+                    <Button
+                      variant="ghost"
+                      className="w-full gap-2 hover:bg-primary/10 hover:text-primary"
+                    >
+                      <ShoppingCart className="h-4 w-4" />
+                      Shop
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
                     onClick={() => {

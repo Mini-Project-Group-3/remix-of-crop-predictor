@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Leaf, Target, BarChart3, Sprout, Globe } from "lucide-react";
+import { Leaf, Target, BarChart3, Sprout, Globe, ShoppingCart } from "lucide-react";
 import heroImage from "@/assets/agricultural-hero.jpg";
 import AgriculturalChatBot from "@/components/AgriculturalChatBot";
 
@@ -17,7 +17,14 @@ const LandingPage = ({ onStartPrediction }: LandingPageProps) => {
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20">
       {/* Fixed Header with Language Selector */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex justify-end">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+          <button 
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
+            title="E-Commerce Store"
+          >
+            <ShoppingCart className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium text-foreground hidden sm:inline">Shop</span>
+          </button>
           <div className="flex items-center gap-2">
             <Globe className="h-4 w-4 text-muted-foreground" />
             <Select value={language} onValueChange={setLanguage}>

@@ -1,15 +1,77 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Wheat, ChevronLeft, Lightbulb } from "lucide-react";
+import { Wheat, ChevronLeft, Lightbulb, Sparkles, Loader2 } from "lucide-react";
+
+interface FormData {
+  location?: { district: string; taluka: string };
+  soilData?: { soilColor: string; nitrogen: number; phosphorus: number; potassium: number; pH: number };
+  fertilizer?: { fertilizerType: string };
+  rainfall?: { rainfall: number; minTemp: number; maxTemp: number };
+  seasonMonth?: { season: string; month: string };
+}
+
+interface CropRecommendation {
+  crop: string;
+  confidence: number;
+  reason: string;
+}
 
 interface CropSelectionFormProps {
   onSubmit: (data: { crop: string }) => void;
   onBack: () => void;
+  formData?: FormData;
 }
 
-const CropSelectionForm = ({ onSubmit, onBack }: CropSelectionFormProps) => {
+const CropSelectionForm = ({ onSubmit, onBack, formData }: CropSelectionFormProps) => {
   const [selectedCrop, setSelectedCrop] = useState("");
+  const [recommendations, setRecommendations] = useState<CropRecommendation[]>([]);
+  const [isLoadingRecommendations, setIsLoadingRecommendations] = useState(false);
+
+  // Fetch recommendations when component mounts or formData changes
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      if (!formData) return;
+      
+      setIsLoadingRecommendations(true);
+      try {
+        // TODO: Replace with actual ML model endpoint
+        // const response = await fetch('http://127.0.0.1:8000/recommend', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({
+        //     district: formData.location?.district,
+        //     nitrogen: formData.soilData?.nitrogen,
+        //     phosphorus: formData.soilData?.phosphorus,
+        //     potassium: formData.soilData?.potassium,
+        //     pH: formData.soilData?.pH,
+        //     rainfall: formData.rainfall?.rainfall,
+        //     temperature: formData.rainfall ? (formData.rainfall.minTemp + formData.rainfall.maxTemp) / 2 : 0,
+        //     soil_color: formData.soilData?.soilColor,
+        //     season: formData.seasonMonth?.season,
+        //     fertilizer: formData.fertilizer?.fertilizerType,
+        //   }),
+        // });
+        // const data = await response.json();
+        // setRecommendations(data.recommendations);
+
+        // Placeholder recommendations until ML model is connected
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setRecommendations([
+          { crop: "Rice", confidence: 92, reason: "Ideal for your soil pH and rainfall levels" },
+          { crop: "Sugarcane", confidence: 85, reason: "Good nutrient match and seasonal fit" },
+          { crop: "Wheat", confidence: 78, reason: "Suitable temperature and soil conditions" },
+        ]);
+      } catch (error) {
+        console.error("Failed to fetch recommendations:", error);
+        setRecommendations([]);
+      } finally {
+        setIsLoadingRecommendations(false);
+      }
+    };
+
+    fetchRecommendations();
+  }, [formData]);
 
   const cropOptions = [
     { value: "Rice", emoji: "🌾", description: "Water-intensive, requires flooded fields" },
@@ -57,6 +119,63 @@ const CropSelectionForm = ({ onSubmit, onBack }: CropSelectionFormProps) => {
         </CardHeader>
 
         <CardContent className="space-y-6">
+          {/* AI Recommendations Section */}
+          <div className="rounded-xl bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20 p-4 shadow-md">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+              <h3 className="font-semibold text-foreground">AI Recommended Crops</h3>
+            </div>
+            
+            {isLoadingRecommendations ? (
+              <div className="flex items-center justify-center py-4 gap-2 text-muted-foreground">
+                <Loader2 className="h-5 w-5 animate-spin" />
+                <span>Analyzing your parameters...</span>
+              </div>
+            ) : recommendations.length > 0 ? (
+              <div className="grid gap-3 md:grid-cols-3">
+                {recommendations.map((rec, index) => (
+                  <Card
+                    key={rec.crop}
+                    className={`cursor-pointer border transition-all duration-300 hover:shadow-md ${
+                      selectedCrop === rec.crop
+                        ? "border-primary ring-2 ring-primary/30 bg-primary/5"
+                        : "border-border/50 hover:border-primary/50"
+                    }`}
+                    onClick={() => setSelectedCrop(rec.crop)}
+                  >
+                    <CardContent className="p-3">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-semibold text-foreground flex items-center gap-1">
+                          {index === 0 && <span className="text-yellow-500">🥇</span>}
+                          {index === 1 && <span className="text-gray-400">🥈</span>}
+                          {index === 2 && <span className="text-amber-600">🥉</span>}
+                          {rec.crop}
+                        </span>
+                        <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                          {rec.confidence}% match
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{rec.reason}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-2">
+                Unable to load recommendations. Please select manually.
+              </p>
+            )}
+          </div>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-card px-2 text-muted-foreground">Or choose from all crops</span>
+            </div>
+          </div>
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {cropOptions.map((crop) => (
               <Card

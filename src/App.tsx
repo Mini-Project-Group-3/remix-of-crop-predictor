@@ -159,7 +159,7 @@ const App = () => {
       case 'season':
         return <SeasonMonthForm onNext={(d) => { setFormData(p => ({ ...p, seasonMonth: d })); setPredictionStep('crop'); }} onBack={() => setPredictionStep('rainfall')} />;
       case 'crop':
-        return <CropSelectionForm onSubmit={handleCropSubmit} onBack={() => setPredictionStep('season')} />;
+        return <CropSelectionForm onSubmit={handleCropSubmit} onBack={() => setPredictionStep('season')} formData={formData} />;
       case 'loading':
         return (
           <div className="min-h-screen bg-gradient-to-br from-background via-secondary/30 to-accent/20 flex items-center justify-center p-4">

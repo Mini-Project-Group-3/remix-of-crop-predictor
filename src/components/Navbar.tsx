@@ -78,7 +78,7 @@ const Navbar = ({ onLogout }: NavbarProps) => {
               variant="ghost"
               size="sm"
               className="gap-2 hover:bg-primary/10 hover:text-primary transition-all duration-300"
-              title="E-Commerce Store"
+              onClick={() => window.open('https://yield-wise-shop.lovable.app', '_blank')}
             >
               <ShoppingCart className="h-4 w-4" />
               Shop
@@ -136,7 +136,10 @@ const Navbar = ({ onLogout }: NavbarProps) => {
                 <div className="mt-auto pt-6 border-t border-border space-y-2">
                   <Button
                     variant="ghost"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      window.open('https://yield-wise-shop.lovable.app', '_blank');
+                    }}
                     className="w-full gap-2 hover:bg-primary/10 hover:text-primary"
                   >
                     <ShoppingCart className="h-4 w-4" />

@@ -7,7 +7,7 @@ export const products: Product[] = [
     name: "Urea Fertilizer",
     price: 1200,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61MYGe6KOPL._AC_UF1000,1000_QL80_.jpg",
     description: "High nitrogen content fertilizer for better crop growth"
   },
   {
@@ -15,7 +15,7 @@ export const products: Product[] = [
     name: "DAP Fertilizer",
     price: 1350,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71xn3VGSG-L._AC_UF1000,1000_QL80_.jpg",
     description: "Di-ammonium phosphate for soil enrichment"
   },
   {
@@ -23,7 +23,7 @@ export const products: Product[] = [
     name: "NPK Fertilizer",
     price: 1100,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71Fnt6jzURL._AC_UF1000,1000_QL80_.jpg",
     description: "Balanced NPK ratio for complete plant nutrition"
   },
   {
@@ -31,7 +31,7 @@ export const products: Product[] = [
     name: "Organic Compost",
     price: 800,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/81j6rSJjnUL._AC_UF1000,1000_QL80_.jpg",
     description: "100% organic compost for sustainable farming"
   },
   {
@@ -39,7 +39,7 @@ export const products: Product[] = [
     name: "Potash Fertilizer (MOP)",
     price: 980,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61xKz8FMPIL._AC_UF1000,1000_QL80_.jpg",
     description: "Muriate of Potash for fruit and root development"
   },
   {
@@ -47,7 +47,7 @@ export const products: Product[] = [
     name: "Vermicompost",
     price: 650,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71Jg2orLJoL._AC_UF1000,1000_QL80_.jpg",
     description: "Earthworm-processed organic fertilizer"
   },
   {
@@ -55,7 +55,7 @@ export const products: Product[] = [
     name: "Bone Meal Fertilizer",
     price: 720,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71aqU0kKHnL._AC_UF1000,1000_QL80_.jpg",
     description: "High phosphorus organic fertilizer for flowering"
   },
   {
@@ -63,7 +63,7 @@ export const products: Product[] = [
     name: "Seaweed Extract",
     price: 550,
     category: "Fertilizer",
-    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61VYkwP9XVL._AC_UF1000,1000_QL80_.jpg",
     description: "Natural growth stimulant and soil conditioner"
   },
   // Seeds
@@ -72,7 +72,7 @@ export const products: Product[] = [
     name: "Hybrid Wheat Seeds",
     price: 800,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61m3hPxV3QL._AC_UF1000,1000_QL80_.jpg",
     description: "High-yield hybrid wheat variety"
   },
   {
@@ -80,7 +80,7 @@ export const products: Product[] = [
     name: "Basmati Rice Seeds",
     price: 950,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71CiGnbDXoL._AC_UF1000,1000_QL80_.jpg",
     description: "Premium basmati rice seeds for quality harvest"
   },
   {
@@ -88,7 +88,7 @@ export const products: Product[] = [
     name: "Mustard Seeds",
     price: 450,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71I6m+xhOxL._AC_UF1000,1000_QL80_.jpg",
     description: "High oil content mustard variety"
   },
   {
@@ -96,7 +96,7 @@ export const products: Product[] = [
     name: "Cotton Seeds",
     price: 1200,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61Gs8iLSKvL._AC_UF1000,1000_QL80_.jpg",
     description: "BT cotton seeds for pest resistance"
   },
   {
@@ -104,7 +104,7 @@ export const products: Product[] = [
     name: "Hybrid Maize Seeds",
     price: 680,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71B6rkU5SjL._AC_UF1000,1000_QL80_.jpg",
     description: "High-yielding corn variety for all seasons"
   },
   {
@@ -112,7 +112,7 @@ export const products: Product[] = [
     name: "Soybean Seeds",
     price: 520,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1599383892307-d98fbc6f0e93?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71Z1ajdNZTL._AC_UF1000,1000_QL80_.jpg",
     description: "Premium quality soybean for oil production"
   },
   {
@@ -120,7 +120,7 @@ export const products: Product[] = [
     name: "Sunflower Seeds",
     price: 480,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/81tXjahC49L._AC_UF1000,1000_QL80_.jpg",
     description: "High oil content sunflower variety"
   },
   {
@@ -128,7 +128,7 @@ export const products: Product[] = [
     name: "Hybrid Tomato Seeds",
     price: 350,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71lUWkLkYIL._AC_UF1000,1000_QL80_.jpg",
     description: "Disease-resistant tomato variety"
   },
   {
@@ -136,7 +136,7 @@ export const products: Product[] = [
     name: "Green Chilli Seeds",
     price: 280,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71cKBkL-WKL._AC_UF1000,1000_QL80_.jpg",
     description: "High-yielding spicy chilli variety"
   },
   {
@@ -144,7 +144,7 @@ export const products: Product[] = [
     name: "Onion Seeds",
     price: 420,
     category: "Seeds",
-    image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71VJhwOQPRL._AC_UF1000,1000_QL80_.jpg",
     description: "Red onion variety with long shelf life"
   },
   // Pesticides
@@ -153,7 +153,7 @@ export const products: Product[] = [
     name: "Pesticide Spray",
     price: 650,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61B8qxBtVpL._AC_UF1000,1000_QL80_.jpg",
     description: "Broad spectrum pesticide for crop protection"
   },
   {
@@ -161,7 +161,7 @@ export const products: Product[] = [
     name: "Fungicide Solution",
     price: 550,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1585399000684-d2f72660f092?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61D+v4b8SxL._AC_UF1000,1000_QL80_.jpg",
     description: "Effective fungicide for disease control"
   },
   {
@@ -169,7 +169,7 @@ export const products: Product[] = [
     name: "Herbicide",
     price: 720,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71NZq8UqOBL._AC_UF1000,1000_QL80_.jpg",
     description: "Selective herbicide for weed management"
   },
   {
@@ -177,7 +177,7 @@ export const products: Product[] = [
     name: "Insecticide",
     price: 480,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61l91FqRYBL._AC_UF1000,1000_QL80_.jpg",
     description: "Fast-acting insecticide for pest control"
   },
   {
@@ -185,7 +185,7 @@ export const products: Product[] = [
     name: "Neem Oil Spray",
     price: 380,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71RBgrzB2dL._AC_UF1000,1000_QL80_.jpg",
     description: "Organic neem-based pest repellent"
   },
   {
@@ -193,7 +193,7 @@ export const products: Product[] = [
     name: "Bio-Pesticide",
     price: 620,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61NB5c9RNbL._AC_UF1000,1000_QL80_.jpg",
     description: "Eco-friendly biological pest control"
   },
   {
@@ -201,7 +201,7 @@ export const products: Product[] = [
     name: "Rodenticide",
     price: 340,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1557170334-a9632e77c5e3?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71qKYc7pw0L._AC_UF1000,1000_QL80_.jpg",
     description: "Effective rodent control for storage areas"
   },
   {
@@ -209,7 +209,7 @@ export const products: Product[] = [
     name: "Miticide Spray",
     price: 590,
     category: "Pesticide",
-    image: "https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61KMxZVa3QL._AC_UF1000,1000_QL80_.jpg",
     description: "Controls mites and spider infestations"
   },
   // Tools
@@ -218,7 +218,7 @@ export const products: Product[] = [
     name: "Hand Trowel",
     price: 350,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1617576683096-00fc8eecb3af?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61KPJnS47EL._AC_UF1000,1000_QL80_.jpg",
     description: "Ergonomic hand trowel for planting"
   },
   {
@@ -226,7 +226,7 @@ export const products: Product[] = [
     name: "Pruning Shears",
     price: 580,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1589923188651-268a9765e432?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71Sg6Zs9pFL._AC_UF1000,1000_QL80_.jpg",
     description: "Sharp pruning shears for trimming"
   },
   {
@@ -234,7 +234,7 @@ export const products: Product[] = [
     name: "Garden Hoe",
     price: 420,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1598902108854-10e335adac99?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61vNxM3JnsL._AC_UF1000,1000_QL80_.jpg",
     description: "Durable garden hoe for soil cultivation"
   },
   {
@@ -242,7 +242,7 @@ export const products: Product[] = [
     name: "Watering Can",
     price: 280,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61yd0dzXHKL._AC_UF1000,1000_QL80_.jpg",
     description: "10L capacity watering can"
   },
   {
@@ -250,7 +250,7 @@ export const products: Product[] = [
     name: "Manual Sprayer Pump",
     price: 850,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61Okt4q3fUL._AC_UF1000,1000_QL80_.jpg",
     description: "16L backpack sprayer for pesticides"
   },
   {
@@ -258,7 +258,7 @@ export const products: Product[] = [
     name: "Garden Fork",
     price: 480,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71G1a3R6aWL._AC_UF1000,1000_QL80_.jpg",
     description: "Heavy-duty fork for soil aeration"
   },
   {
@@ -266,7 +266,7 @@ export const products: Product[] = [
     name: "Garden Wheelbarrow",
     price: 2200,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71sF+IVIIFL._AC_UF1000,1000_QL80_.jpg",
     description: "100L capacity steel wheelbarrow"
   },
   {
@@ -274,7 +274,7 @@ export const products: Product[] = [
     name: "Leaf Rake",
     price: 320,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/71bzRSwGhzL._AC_UF1000,1000_QL80_.jpg",
     description: "Wide fan rake for leaves and debris"
   },
   {
@@ -282,7 +282,7 @@ export const products: Product[] = [
     name: "Garden Gloves",
     price: 180,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/81dUIxbPdVL._AC_UF1000,1000_QL80_.jpg",
     description: "Durable nitrile-coated work gloves"
   },
   {
@@ -290,7 +290,7 @@ export const products: Product[] = [
     name: "Soil pH Meter",
     price: 450,
     category: "Tools",
-    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop",
+    image: "https://m.media-amazon.com/images/I/61LRv0QMXWL._AC_UF1000,1000_QL80_.jpg",
     description: "Digital soil moisture and pH tester"
   }
 ];

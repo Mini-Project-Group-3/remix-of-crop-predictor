@@ -22,6 +22,13 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            // Some CDNs block hotlinking; fall back to local placeholder
+            e.currentTarget.src = "/placeholder.svg";
+          }}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>

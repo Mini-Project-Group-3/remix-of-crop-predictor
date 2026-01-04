@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import CreatorsPage from "./pages/CreatorsPage";
+import ShopLayout from "./pages/ShopLayout";
 import Navbar from "./components/Navbar";
 import LoginTransition from "./components/LoginTransition";
 import LocationForm from "./components/LocationForm";
@@ -234,16 +235,24 @@ const App = () => {
           ) : predictionStep !== 'none' ? (
             renderPredictionFlow()
           ) : (
-            <>
-              <Navbar onLogout={handleLogout} />
-              <Routes>
-                <Route path="/home" element={<HomePage onStartPrediction={handleStartPrediction} />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/how-it-works" element={<HowItWorksPage />} />
-                <Route path="/creators" element={<CreatorsPage />} />
-                <Route path="*" element={<Navigate to="/home" replace />} />
-              </Routes>
-            </>
+            <Routes>
+              <Route path="/shop/*" element={<ShopLayout />} />
+              <Route
+                path="*"
+                element={
+                  <>
+                    <Navbar onLogout={handleLogout} />
+                    <Routes>
+                      <Route path="/home" element={<HomePage onStartPrediction={handleStartPrediction} />} />
+                      <Route path="/about" element={<AboutPage />} />
+                      <Route path="/how-it-works" element={<HowItWorksPage />} />
+                      <Route path="/creators" element={<CreatorsPage />} />
+                      <Route path="*" element={<Navigate to="/home" replace />} />
+                    </Routes>
+                  </>
+                }
+              />
+            </Routes>
           )}
         </BrowserRouter>
       </TooltipProvider>
